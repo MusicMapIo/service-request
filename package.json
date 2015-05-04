@@ -1,0 +1,27 @@
+{
+  "name": "service-request",
+  "version": "1.0.0",
+  "description": "A wrapper around making internal service requests",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MusicMapIo/service-request.git"
+  },
+  "keywords": [
+    "request",
+    "http"
+  ],
+  "author": "MusicMap",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MusicMapIo/service-request/issues"
+  },
+  "homepage": "https://github.com/MusicMapIo/service-request",
+  "dependencies": {
+    "logtastic": "^2.0.0",
+    "request": "^2.55.0"
+  }
+}
