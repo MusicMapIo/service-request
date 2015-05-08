@@ -13,10 +13,17 @@ var serviceRequest = module.exports = function(opts, done) {
 	}
 
 	// Add protocol and hostname if absent
-	var u = url.parse(opts.url || opts.uri);
-	u.protocol = u.protocol || serviceRequest.protocol;
-	u.hostname = u.hostname || serviceRequest.hostname;
-	opts.uri = u.format();
+	var uri = opts.url || opts.uri;
+	if (typeof uri === 'string') {
+		uri = url.parse(uri);
+	}
+
+	// Default protocol and host
+	uri.protocol = uri.protocol || serviceRequest.protocol;
+	uri.hostname = uri.hostname || serviceRequest.hostname;
+
+	// Format the url
+	opts.uri = url.format(uri);
 
 	// Add headers
 	opts.headers = opts.headers || {};
