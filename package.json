@@ -22,6 +22,7 @@
   "homepage": "https://github.com/MusicMapIo/service-request",
   "dependencies": {
     "logtastic": "^2.0.0",
-    "request": "^2.55.0"
+    "request": "^2.55.0",
+    "trusted-real-ip": "git+ssh://git@github.com:MusicMapIo/trusted-real-ip.git"
   }
 }

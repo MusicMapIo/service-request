@@ -1,9 +1,16 @@
 var request = require('request'),
 	url = require('url'),
-	logger = require('logtastic');
+	logger = require('logtastic'),
+	tip = require('trusted-real-ip');
 
 var serviceRequest = module.exports = function(opts, done) {
 	opts = opts || {};
+
+	// log when the request is not provided
+	if (!opts.req) {
+		logger.warning('Request not provided to service request, things might not work correctly without it');
+		opts.req = {};
+	}
 
 	// Add protocol and hostname if absent
 	var u = url.parse(opts.url || opts.uri);
@@ -23,6 +30,10 @@ var serviceRequest = module.exports = function(opts, done) {
 		}
 	}
 
+	// Set the trusted ip header, unless othwerwise set
+	opts.headers[tip.header] = opts.headers[tip.header] || tip.encode(opts.req.ip);
+
+	// Make the actual request
 	request(opts, function(err, resp, body) {
 		// Log error responses
 		if (err) {
