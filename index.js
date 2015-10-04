@@ -9,7 +9,6 @@ var serviceRequest = module.exports = function(opts, done) {
 	// log when the request is not provided
 	if (!opts.req) {
 		logger.warning('Request not provided to service request, things might not work correctly without it');
-		opts.req = {};
 	}
 
 	// Add protocol and hostname if absent
@@ -38,7 +37,7 @@ var serviceRequest = module.exports = function(opts, done) {
 	}
 
 	// Set the trusted ip header, unless othwerwise set
-	opts.headers[tip.header] = opts.headers[tip.header] || tip.encode(opts.req.ip);
+	opts.headers[tip.header] = opts.headers[tip.header] || opts.req ? tip.encode(opts.req.ip) : tip.encode('127.0.0.1');
 
 	// Make the actual request
 	request(opts, function(err, resp, body) {

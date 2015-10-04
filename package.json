@@ -1,6 +1,6 @@
 {
   "name": "service-request",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A wrapper around making internal service requests",
   "main": "index.js",
   "scripts": {
