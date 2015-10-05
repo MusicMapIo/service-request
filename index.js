@@ -54,11 +54,7 @@ serviceRequest.logErrorResponse = function(opts, err, resp, body) {
 	var msg = 'Service request error',
 		level = 'error',
 		meta = {
-			options: opts,
-			response: {
-				code: resp.statusCode,
-				headers: resp.headers
-			}
+			options: opts
 		};
 
 	// Log error responses
@@ -68,11 +64,19 @@ serviceRequest.logErrorResponse = function(opts, err, resp, body) {
 		meta.body = body;
 		body && body.errors ? meta.errors = body.errors : false;
 		msg = 'Service request 500 response';
+		meta.response = {
+			code: resp.statusCode,
+			headers: resp.headers
+		};
 	} else if (resp.statusCode >= 400) {
 		meta.body = body;
 		body && body.errors ? meta.errors = body.errors : false;
 		level = 'warning'
 		msg = 'Service request 400 response';
+		meta.response = {
+			code: resp.statusCode,
+			headers: resp.headers
+		};
 	}
 	logger[level](msg, meta);
 };
