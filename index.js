@@ -20,6 +20,9 @@ var serviceRequest = module.exports = function(opts, done) {
 	uri.protocol = uri.protocol || serviceRequest.protocol;
 	uri.hostname = uri.hostname || serviceRequest.hostname;
 
+	// Expect json by default
+	opts.json = typeof opts.json !== 'undefined' ? opts.json : true;
+
 	// Format the url
 	opts.uri = url.format(uri);
 
@@ -50,7 +53,10 @@ serviceRequest.logErrorResponse = function(opts, err, resp, body) {
 	var msg = 'Service request error',
 		level = 'error',
 		meta = {
-			options: opts
+			options: {
+				uri: opts.uri,
+				headers: opts.req && opts.req.headers
+			}
 		};
 
 	// Log error responses
@@ -77,6 +83,6 @@ serviceRequest.logErrorResponse = function(opts, err, resp, body) {
 	logger[level](msg, meta);
 };
 
-serviceRequest.hostname = 'localhost';
-serviceRequest.protocol = 'http:';
+serviceRequest.hostname = typeof window !== 'undefined' ? window.location.hostname : 'localhost';
+serviceRequest.protocol = typeof window !== 'undefined' ? window.location.protocol : 'http:';
 serviceRequest.headers = {};
