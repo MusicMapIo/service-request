@@ -1,6 +1,6 @@
 {
   "name": "service-request",
-  "version": "1.1.1",
+  "version": "2.0.0",
   "description": "A wrapper around making internal service requests",
   "main": "index.js",
   "scripts": {
@@ -21,8 +21,7 @@
   },
   "homepage": "https://github.com/MusicMapIo/service-request",
   "dependencies": {
-    "logtastic": "^2.0.0",
-    "request": "^2.55.0",
-    "trusted-real-ip": "git+ssh://git@github.com:MusicMapIo/trusted-real-ip.git"
+    "logtastic": "^2.1.0",
+    "nets": "^3.2.0"
   }
 }

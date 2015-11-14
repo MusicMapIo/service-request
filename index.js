@@ -1,7 +1,6 @@
-var request = require('request'),
-	url = require('url'),
-	logger = require('logtastic'),
-	tip = require('trusted-real-ip');
+var nets = require('nets');
+var url = require('url');
+var logger = require('logtastic');
 
 var serviceRequest = module.exports = function(opts, done) {
 	opts = opts || {};
@@ -36,11 +35,8 @@ var serviceRequest = module.exports = function(opts, done) {
 		}
 	}
 
-	// Set the trusted ip header, unless othwerwise set
-	opts.headers[tip.header] = opts.headers[tip.header] || opts.req ? tip.encode(opts.req.ip) : tip.encode('127.0.0.1');
-
 	// Make the actual request
-	request(opts, function(err, resp, body) {
+	nets(opts, function(err, resp, body) {
 		if (err || resp.statusCode >= 400) {
 			serviceRequest.logErrorResponse(opts, err, resp, body);
 		}
