@@ -19,6 +19,7 @@ var serviceRequest = module.exports = function(opts, done) {
 	// Default protocol and host
 	uri.protocol = uri.protocol || serviceRequest.protocol;
 	uri.hostname = uri.hostname || serviceRequest.hostname;
+	uri.port = uri.port || serviceRequest.port;
 
 	// Expect json by default
 	opts.json = typeof opts.json !== 'undefined' ? opts.json : true;
@@ -85,4 +86,6 @@ serviceRequest.logErrorResponse = function(opts, err, resp, body) {
 
 serviceRequest.hostname = typeof window !== 'undefined' ? window.location.hostname : 'localhost';
 serviceRequest.protocol = typeof window !== 'undefined' ? window.location.protocol : 'http:';
+serviceRequest.port = typeof window !== 'undefined' ? window.location.protocol : null;
+
 serviceRequest.headers = {};
