@@ -86,6 +86,6 @@ serviceRequest.logErrorResponse = function(opts, err, resp, body) {
 
 serviceRequest.hostname = typeof window !== 'undefined' ? window.location.hostname : 'localhost';
 serviceRequest.protocol = typeof window !== 'undefined' ? window.location.protocol : 'http:';
-serviceRequest.port = typeof window !== 'undefined' ? window.location.protocol : null;
+serviceRequest.port = typeof window !== 'undefined' ? window.location.port : null;
 
 serviceRequest.headers = {};
